@@ -6,7 +6,7 @@ async function getLogin(req:Request, res:Response) {
   const { username, password } = req.body;
   const login = await LoginService.getLogin(username, password);
   if (!login) {
-    res.status(401).json({ message: 'Username or password invalid' });
+    return res.status(401).json({ message: 'Username or password invalid' });
   }
   const secret = 'mysecret';
   const config: SignOptions = {
@@ -16,7 +16,7 @@ async function getLogin(req:Request, res:Response) {
   const token = jwt.sign({ login }, secret, config);
   const data = { token, ...login };
   
-  res.status(200).json({ token: data.token });
-}
+  return res.status(200).json({ token: data.token });
+} 
 
 export default { getLogin };

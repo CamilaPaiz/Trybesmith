@@ -11,7 +11,6 @@ async function getAll():Promise<IOrder[]> {
     GROUP BY o.id
     ORDER BY o.id
     `);
-  console.log('model', result);
   return result;
 }
 
